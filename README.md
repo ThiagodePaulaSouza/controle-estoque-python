@@ -4,7 +4,7 @@ Projeto desenvolvido como parte da disciplina de Algoritmos e Programação em L
 
 ## 👥 Equipe
 - André Luiz Junqueira Poles – 240618
-- Nome 2 – [RA/ID]
+- Thiago de Paula Souza – 241878
 - Nome 3 – [RA/ID]
 - Nome 4 – [RA/ID]
 
