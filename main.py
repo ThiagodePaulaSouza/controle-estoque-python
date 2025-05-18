@@ -1,10 +1,10 @@
-from aplicacao.estoque import Estoque
-from aplicacao.produto import Produto
+from aplicacao.estoque_app import EstoqueApp
+from aplicacao.produto_app import ProdutoApp
 
 class Main:
     def __init__(self):
-        self.__Estoque__ = Estoque()
-        self.__Produto__ = Produto()
+        self.__Estoque__ = EstoqueApp()
+        self.__Produto__ = ProdutoApp()
 
         self.__running__ = True
         self.__opcoes__ = {
@@ -13,8 +13,8 @@ class Main:
             'C': ['Cadastra Produto', self.__Produto__.cadastrar_produto],
             'E': ['Editar Produto', self.__Produto__.editar_produto],
             'D': ['Deletar Produto (afeta estoque)', self.__Produto__.deletar_produto],
-            'A': ['Adicionar ao Estoque', self.__Estoque__.adicionar_estoque],
-            'R': ['Remover do Estoque', self.__Estoque__.remover_estoque],
+            'A': ['Adicionar ao Estoque', self.__Estoque__.adicionar_ao_estoque],
+            'R': ['Remover do Estoque', self.__Estoque__.remover_do_estoque],
             'S': ['Sair', self.sair],
         }
 
