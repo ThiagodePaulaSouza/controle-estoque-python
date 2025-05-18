@@ -19,24 +19,36 @@ class Main:
         }
 
     def run(self):
-        while(self.__running__):
-            print("\nBem vindo ao Gerenciador de Estoque!\n")
+        print("\nBem vindo ao Gerenciador de Estoque!\n")
 
-            # TODO mostrar produtos com estoque abaixo do minimo
+        while(self.__running__):
+            self.__Estoque__.produtos_com_baixo_estoque()
 
             for opt in self.__opcoes__:
                 print(f"{opt} - {self.__opcoes__[opt][0]}")
 
-            opcao = input("\nEscolha uma opção: ").strip().upper()
+            opcao = input("\nEscolha uma opção: ")
+            opcao.strip().upper()
 
-            print('\n')
-            
-            self.__opcoes__[opcao][1]()
-            
-            pass
+            self.executar_funcao(opcao)
+
+    def executar_funcao(self, opcao):
+        if(opcao == 'S'):
+            self.sair()
+            return
+
+        self.__opcoes__[opcao][1]()
+        continuar = input('\nDeseja Continuar? (S/N) ')
+        continuar.strip().upper()
+
+        if(continuar == 'N'):
+            self.sair()
+        else:
+            return
 
     def sair(self):
         self.__running__ = False
+        print('\nPrograma finalizado.\n')
     
 if __name__ == '__main__':
     Main().run()
