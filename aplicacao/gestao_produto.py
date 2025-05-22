@@ -1,6 +1,6 @@
 from models.produto import Produto
 
-class ProdutoApp:
+class GestaoProduto:
     def __init__(self):
         pass
 

@@ -3,7 +3,6 @@ class Produto:
     self.__id = id
     self.__nome = nome
     self.__quantidade_minima = quantidade_minima
-    self.__quantidade_atual = 0
 
   @property
   def nome(self):

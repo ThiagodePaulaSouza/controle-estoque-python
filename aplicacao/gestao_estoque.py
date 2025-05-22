@@ -1,7 +1,7 @@
-from aplicacao.produto_app import ProdutoApp
+from aplicacao.gestao_produto import ProdutoApp
 from models.produto import Produto
 
-class EstoqueApp:
+class GestaoEstoque:
     def __init__(self):
         self.__produto_app__ = ProdutoApp()
         pass
@@ -25,7 +25,7 @@ class EstoqueApp:
 
         print('Produto(s) adicionado ao estoque com sucesso!')
 
-    def remover_do_estoque(self):
+    def retirar_do_estoque(self):
         self.__produto_app__.listar_todos_produtos()
 
         produto_selecionado = input('Selecione qual produto deseja adicionar ao estoque (id): ')
