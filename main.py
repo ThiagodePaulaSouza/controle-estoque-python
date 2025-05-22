@@ -1,10 +1,10 @@
-from aplicacao.estoque_app import EstoqueApp
-from aplicacao.produto_app import ProdutoApp
+from aplicacao.gestao_estoque import GestaoEstoque
+from aplicacao.gestao_produto import GestaoProduto
 
 class Main:
     def __init__(self):
-        self.__Estoque__ = EstoqueApp()
-        self.__Produto__ = ProdutoApp()
+        self.__Estoque__ = GestaoEstoque()
+        self.__Produto__ = GestaoProduto()
 
         self.__running__ = True
         self.__opcoes__ = {
@@ -14,15 +14,15 @@ class Main:
             'E': ['Editar Produto', self.__Produto__.editar_produto],
             'D': ['Deletar Produto (afeta estoque)', self.__Produto__.deletar_produto],
             'A': ['Adicionar ao Estoque', self.__Estoque__.adicionar_ao_estoque],
-            'R': ['Remover do Estoque', self.__Estoque__.remover_do_estoque],
+            'R': ['Retirar do Estoque', self.__Estoque__.retirar_do_estoque],
             'S': ['Sair', self.sair],
         }
 
     def run(self):
         print("\nBem vindo ao Gerenciador de Estoque!\n")
+        self.__Estoque__.produtos_com_baixo_estoque()
 
         while(self.__running__):
-            self.__Estoque__.produtos_com_baixo_estoque()
 
             for opt in self.__opcoes__:
                 print(f"{opt} - {self.__opcoes__[opt][0]}")
