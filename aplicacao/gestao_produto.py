@@ -8,7 +8,7 @@ class GestaoProduto:
 
         self.__lista_produtos = []
 
-        self.carregar_produtos_arquivo(self)
+        self.carregar_produtos_arquivo()
 
     def carregar_produtos_arquivo(self):
         self.__lista_produtos = self.__arquivo_helper.ler_arquivo()
@@ -29,7 +29,7 @@ class GestaoProduto:
             print(produto)
 
     def pesquisar_produto_nome(self):
-        nome = input("Entre com o nome do produto que você deseja visualizar. ")
+        nome = input("Entre com o nome do produto que vocÃª deseja visualizar. ")
 
         produto = self.pesquisar_produto_nome(nome)
         if produto is not None:
@@ -48,10 +48,10 @@ class GestaoProduto:
 
     def pesquisar_produto_por_id(self):
 
-        id = input("Entre com o id do produto que você deseja visualizar. ")
+        id = input("Entre com o id do produto que vocÃª deseja visualizar. ")
 
         if not ValidacaoHelper().validar_string_numerica(id):
-            print("Digitado valor inválido para o id")
+            print("Digitado valor invÃ¡lido para o id")
             return 
 
         id = int(id)
@@ -73,24 +73,28 @@ class GestaoProduto:
 
 
     def cadastrar_produto(self):
-        nome = print("Entre com o nome do produto. ")
+        nome = input("Entre com o nome do produto. ")
 
         produto = self.pesquisar_produto_nome(nome)
         if produto is not None:
-            print("Já existe um produto cadastrado com o nome digitado")
+            print("JÃ¡ existe um produto cadastrado com o nome digitado")
             return
 
-        fornecedor = print("Entre com o nome do fornecedor. ")
+        fornecedor = input("Entre com o nome do fornecedor. ")
 
-        quantidade_minima = print("Entre com a quantidade mínima para o produto. ")
+        quantidade_minima = input("Entre com a quantidade mÃ­nima para o produto. ")
 
         if not ValidacaoHelper().validar_string_numerica(quantidade_minima):
-            print("Digitado valor inválido para a quantidade mínima")
+            print("Digitado valor invÃ¡lido para a quantidade mÃ­nima")
             return 
 
         quantidade_minima = float(quantidade_minima)
 
-        maior_id = max( list(map( lambda p: p.id, self.__lista_produtos )) )
+        ids = list(map( lambda p: p.id, self.__lista_produtos ))
+        if len(ids) == 0:
+            maior_id = 0
+        else:
+            maior_id = max( ids )
 
         self.__lista_produtos.append( 
             Produto(maior_id + 1, nome, fornecedor, quantidade_minima)
@@ -102,10 +106,10 @@ class GestaoProduto:
 
     def editar_produto(self):
 
-        id = input("Entre com o id do produto que você deseja editar. ")
+        id = input("Entre com o id do produto que vocÃª deseja editar. ")
 
         if not ValidacaoHelper().validar_string_numerica(id):
-            print("Digitado valor inválido para o id")
+            print("Digitado valor invÃ¡lido para o id")
             return 
 
         id = int(id)
@@ -117,19 +121,19 @@ class GestaoProduto:
 
         print(f"Produto encontrado. Dados atuais: {produto}")
 
-        nome = print("Entre com o novo nome do produto. ")
+        nome = input("Entre com o novo nome do produto. ")
 
         produto = self.pesquisar_produto_nome(nome)
         if produto is not None:
-            print("Já existe um produto cadastrado com o nome digitado")
+            print("JÃ¡ existe um produto cadastrado com o nome digitado")
             return
 
-        fornecedor = print("Entre com o nome do novo fornecedor. ")
+        fornecedor = input("Entre com o nome do novo fornecedor. ")
 
-        quantidade_minima = print("Entre com a nova quantidade mínima para o produto. ")
+        quantidade_minima = input("Entre com a nova quantidade mÃ­nima para o produto. ")
 
         if not ValidacaoHelper().validar_string_numerica(quantidade_minima):
-            print("Digitado valor inválido para a quantidade mínima")
+            print("Digitado valor invÃ¡lido para a quantidade mÃ­nima")
             return 
 
         quantidade_minima = float(quantidade_minima)
@@ -142,10 +146,10 @@ class GestaoProduto:
 
     def deletar_produto(self):
 
-        id = input("Entre com o id do produto que você deseja excluir. ")
+        id = input("Entre com o id do produto que vocÃª deseja excluir. ")
 
         if not ValidacaoHelper().validar_string_numerica(id):
-            print("Digitado valor inválido para o id")
+            print("Digitado valor invÃ¡lido para o id")
             return 
 
         id = int(id)
@@ -162,5 +166,5 @@ class GestaoProduto:
 
         self.salvar_lista_produtos()
 
-        print("Produto excluído com sucesso!")
+        print("Produto excluÃ­do com sucesso!")
 

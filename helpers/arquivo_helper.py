@@ -1,27 +1,31 @@
 from models.produto import Produto
 from configurations.configurations import Configurations
 from datetime import date
-from csv import csv
+import csv 
+import os
 
 class ArquivoHelper():
     def __init__(self):
         self.__configurations = Configurations()
 
     def ler_arquivo(self):
-        with open(self.__configurations.arquivo_saida, 'r', encoding='UTF-8') as arquivo:
+        if os.path.exists(self.__configurations.arquivo_saida):
+            with open(self.__configurations.arquivo_saida, 'r', encoding='UTF-8') as arquivo:
 
-            arquivo_csv = csv.DictReader(arquivo)
+                arquivo_csv = csv.DictReader(arquivo)
 
-            next(arquivo)
+                next(arquivo)
 
-            lista_produtos = []
+                lista_produtos = []
 
-            for linha in arquivo_csv:
-                lista_produtos.append(
-                    Produto(linha)
-                )
+                for linha in arquivo_csv:
+                    lista_produtos.append(
+                        Produto(linha)
+                    )
 
-            return lista_produtos
+                return lista_produtos
+        else:
+            return []
 
     def escrever_arquivo(self, lista_produtos):
         with open(self.__configurations.arquivo_saida, 'w+', encoding='UTF-8') as arquivo:

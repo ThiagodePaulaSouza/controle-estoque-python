@@ -9,7 +9,7 @@ class Main:
         self.__executando = True
         self.__opcoes = {
             'L': ['Listar Todos Produtos', self.__gestao_produto.listar_todos_produtos],
-            'P': ['Pesquisar Produto por nome', self.__gestao_produto.pesquisar_produto],
+            'P': ['Pesquisar Produto por nome', self.__gestao_produto.pesquisar_produto_nome],
             'C': ['Cadastra Produto', self.__gestao_produto.cadastrar_produto],
             'E': ['Editar Produto', self.__gestao_produto.editar_produto],
             'D': ['Deletar Produto (afeta estoque)', self.__gestao_produto.deletar_produto],
@@ -28,7 +28,7 @@ class Main:
                 print(f"{opt} - {self.__opcoes[opt][0]}")
 
             opcao = input("\nEscolha uma opção: ")
-            opcao.strip().upper()
+            opcao = opcao.strip().upper()
 
             self.executar_funcao(opcao)
 
@@ -39,7 +39,7 @@ class Main:
 
         self.__opcoes[opcao][1]()
         continuar = input('\nDeseja Continuar? (S/N) ')
-        continuar.strip().upper()
+        continuar = continuar.strip().upper()
 
         if(continuar == 'N'):
             self.sair()

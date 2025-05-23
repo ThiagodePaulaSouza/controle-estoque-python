@@ -51,4 +51,4 @@ class Produto:
     return
 
   def __str__(self):
-    return f"Id: {self.id} | Nome: {self.nome} | Fornecedor: {self.fornecedor} | Quantidade mínima: {self.quantidade_minima} | Estoque atual: {self.quantidade_atual}"
+    return f"Id: {self.id} | Nome: {self.nome} | Fornecedor: {self.fornecedor} | Quantidade mÃ­nima: {self.quantidade_minima} | Estoque atual: {self.quantidade_atual}"

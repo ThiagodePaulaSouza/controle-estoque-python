@@ -1,5 +1,5 @@
 class ValidacaoHelper():
-    def validar_string_numerica(entrada):
+    def validar_string_numerica(self, entrada):
         if entrada == "":
           return False
 
