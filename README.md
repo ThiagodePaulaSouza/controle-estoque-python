@@ -5,8 +5,8 @@ Projeto desenvolvido como parte da disciplina de Algoritmos e Programação em L
 ## 👥 Equipe
 - André Luiz Junqueira Poles – 240618
 - Thiago de Paula Souza – 241878
-- Nome 3 – [RA/ID]
-- Nome 4 – [RA/ID]
+- Everton Luis Lourenço – 242438
+- Luiz Eduardo Vieira - 200340
 
 ## 🎯 Objetivo
 O sistema permitirá o gerenciamento completo de produtos e seus respectivos estoques, garantindo que o controle de quantidades seja preciso, com destaque para a notificação de estoques abaixo ou iguais ao nível mínimo.
