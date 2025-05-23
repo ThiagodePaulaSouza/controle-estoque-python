@@ -1,5 +1,7 @@
 class ValidacaoHelper():
-    def validar_string_numerica(self, entrada):
+
+    @staticmethod
+    def validar_string_numerica(entrada):
         if entrada == "":
           return False
 

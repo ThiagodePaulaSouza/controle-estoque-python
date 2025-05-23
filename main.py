@@ -3,14 +3,15 @@ from aplicacao.gestao_produto import GestaoProduto
 
 class Main:
     def __init__(self):
-        self.__estoque = GestaoEstoque()
         self.__gestao_produto = GestaoProduto()
+        self.__estoque = GestaoEstoque( self.__gestao_produto )
+        
 
         self.__executando = True
         self.__opcoes = {
             'L': ['Listar Todos Produtos', self.__gestao_produto.listar_todos_produtos],
             'P': ['Pesquisar Produto por nome', self.__gestao_produto.pesquisar_produto_nome],
-            'C': ['Cadastra Produto', self.__gestao_produto.cadastrar_produto],
+            'C': ['Cadastrar Produto', self.__gestao_produto.cadastrar_produto],
             'E': ['Editar Produto', self.__gestao_produto.editar_produto],
             'D': ['Deletar Produto (afeta estoque)', self.__gestao_produto.deletar_produto],
             'A': ['Adicionar ao Estoque', self.__estoque.adicionar_ao_estoque],

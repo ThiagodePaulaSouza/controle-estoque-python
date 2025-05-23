@@ -14,13 +14,12 @@ class ArquivoHelper():
 
                 arquivo_csv = csv.DictReader(arquivo)
 
-                next(arquivo)
-
                 lista_produtos = []
 
                 for linha in arquivo_csv:
+                    #print(linha)
                     lista_produtos.append(
-                        Produto().gerar_produto_pela_linha(linha)
+                        Produto.construir_produto_pela_linha(linha)
                     )
 
                 return lista_produtos
