@@ -20,7 +20,7 @@ class ArquivoHelper():
 
                 for linha in arquivo_csv:
                     lista_produtos.append(
-                        Produto(linha)
+                        Produto().gerar_produto_pela_linha(linha)
                     )
 
                 return lista_produtos

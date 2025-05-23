@@ -5,14 +5,11 @@ class Produto:
     self.__fornecedor = fornecedor
     self.__quantidade_minima = quantidade_minima
     self.__quantidade_atual = 0
-
-  def __init__(self, linha_dict):
-    self.__id = int( linha_dict['id'] )
-    self.__nome = linha_dict['nome']
-    self.__fornecedor = linha_dict['fornecedor']
-    self.__quantidade_minima = float( linha_dict['quantidade_minima'] ) 
-    self.__quantidade_atual = float( linha_dict['quantidade_atual'] )
     
+  @property
+  def id(self):
+    return self.__id
+
   @property
   def nome(self):
     return self.__nome
@@ -35,6 +32,12 @@ class Produto:
   def retirar_estoque(self, quantidade):
     self.__quantidade_atual -= quantidade
 
+  def atualizar_produto(self, nome, fornecedor, quantidade_minima):
+    self.__nome = nome
+    self.__fornecedor = fornecedor
+    self.__quantidade_minima = quantidade_minima
+    return
+
   def gerar_lista_campos_arquivo(self):
     return [
         self.id,
@@ -44,11 +47,10 @@ class Produto:
         self.quantidade_atual
     ]
   
-  def atualizar_produto(self, nome, fornecedor, quantidade_minima):
-    self.__nome = nome
-    self.__fornecedor = fornecedor
-    self.__quantidade_minima = quantidade_minima
-    return
+  def gerar_produto_pela_linha(self, linha_dict):
+    prd = Produto( int( linha_dict['id'] ), linha_dict['nome'], linha_dict['fornecedor'], float( linha_dict['quantidade_minima'] ) )
+    prd.adicionar_estoque( float( linha_dict['quantidade_atual'] ) )
+    return prd
 
   def __str__(self):
     return f"Id: {self.id} | Nome: {self.nome} | Fornecedor: {self.fornecedor} | Quantidade mínima: {self.quantidade_minima} | Estoque atual: {self.quantidade_atual}"
