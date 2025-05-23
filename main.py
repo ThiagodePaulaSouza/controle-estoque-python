@@ -3,29 +3,29 @@ from aplicacao.gestao_produto import GestaoProduto
 
 class Main:
     def __init__(self):
-        self.__Estoque__ = GestaoEstoque()
-        self.__Produto__ = GestaoProduto()
+        self.__estoque = GestaoEstoque()
+        self.__gestao_produto = GestaoProduto()
 
-        self.__running__ = True
-        self.__opcoes__ = {
-            'L': ['Listar Todos Produtos', self.__Produto__.listar_todos_produtos],
-            'P': ['Pesquisar Produto por nome', self.__Produto__.pesquisar_produto],
-            'C': ['Cadastra Produto', self.__Produto__.cadastrar_produto],
-            'E': ['Editar Produto', self.__Produto__.editar_produto],
-            'D': ['Deletar Produto (afeta estoque)', self.__Produto__.deletar_produto],
-            'A': ['Adicionar ao Estoque', self.__Estoque__.adicionar_ao_estoque],
-            'R': ['Retirar do Estoque', self.__Estoque__.retirar_do_estoque],
+        self.__executando = True
+        self.__opcoes = {
+            'L': ['Listar Todos Produtos', self.__gestao_produto.listar_todos_produtos],
+            'P': ['Pesquisar Produto por nome', self.__gestao_produto.pesquisar_produto],
+            'C': ['Cadastra Produto', self.__gestao_produto.cadastrar_produto],
+            'E': ['Editar Produto', self.__gestao_produto.editar_produto],
+            'D': ['Deletar Produto (afeta estoque)', self.__gestao_produto.deletar_produto],
+            'A': ['Adicionar ao Estoque', self.__estoque.adicionar_ao_estoque],
+            'R': ['Retirar do Estoque', self.__estoque.retirar_do_estoque],
             'S': ['Sair', self.sair],
         }
 
-    def run(self):
+    def executar(self):
         print("\nBem vindo ao Gerenciador de Estoque!\n")
-        self.__Estoque__.produtos_com_baixo_estoque()
+        self.__estoque.produtos_com_baixo_estoque()
 
-        while(self.__running__):
+        while(self.__executando):
 
-            for opt in self.__opcoes__:
-                print(f"{opt} - {self.__opcoes__[opt][0]}")
+            for opt in self.__opcoes:
+                print(f"{opt} - {self.__opcoes[opt][0]}")
 
             opcao = input("\nEscolha uma opção: ")
             opcao.strip().upper()
@@ -37,7 +37,7 @@ class Main:
             self.sair()
             return
 
-        self.__opcoes__[opcao][1]()
+        self.__opcoes[opcao][1]()
         continuar = input('\nDeseja Continuar? (S/N) ')
         continuar.strip().upper()
 
@@ -47,8 +47,8 @@ class Main:
             return
 
     def sair(self):
-        self.__running__ = False
+        self.__executando = False
         print('\nPrograma finalizado.\n')
     
 if __name__ == '__main__':
-    Main().run()
+    Main().executar()

@@ -3,5 +3,5 @@ class Configurations():
     self.__file_output = './out/estoque.csv'
 
   @property
-  def file_output(self):
+  def arquivo_saida(self):
     return self.__file_output
