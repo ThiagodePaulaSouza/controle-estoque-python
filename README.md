@@ -4,9 +4,9 @@ Projeto desenvolvido como parte da disciplina de Algoritmos e Programação em L
 
 ## 👥 Equipe
 - André Luiz Junqueira Poles – 240618
-- Thiago de Paula Souza – 241878
 - Everton Luis Lourenço – 242438
 - Luiz Eduardo Vieira - 200340
+- Thiago de Paula Souza – 241878
 
 ## 🎯 Objetivo
 O sistema permitirá o gerenciamento completo de produtos e seus respectivos estoques, garantindo que o controle de quantidades seja preciso, com destaque para a notificação de estoques abaixo ou iguais ao nível mínimo.
@@ -18,5 +18,3 @@ O sistema permitirá o gerenciamento completo de produtos e seus respectivos est
 - **Listagem automática** de produtos com estoque abaixo ou igual ao mínimo ao iniciar o programa.
 - **Persistência dos dados** em arquivos (sem uso de banco de dados).
 - Interface simples via terminal/console (modo texto).
-
-## 📁 Estrutura do Projeto

@@ -11,13 +11,11 @@ class ArquivoHelper():
     def ler_arquivo(self):
         if os.path.exists(self.__configurations.arquivo_saida):
             with open(self.__configurations.arquivo_saida, 'r', encoding='UTF-8') as arquivo:
-
                 arquivo_csv = csv.DictReader(arquivo)
 
                 lista_produtos = []
 
                 for linha in arquivo_csv:
-                    #print(linha)
                     lista_produtos.append(
                         Produto.construir_produto_pela_linha(linha)
                     )
@@ -28,7 +26,6 @@ class ArquivoHelper():
 
     def escrever_arquivo(self, lista_produtos):
         with open(self.__configurations.arquivo_saida, 'w+', encoding='UTF-8') as arquivo:
-
             linhas_saida = [
                 ['id', 'nome', 'fornecedor', 'quantidade_minima', 'quantidade_atual']
             ]
