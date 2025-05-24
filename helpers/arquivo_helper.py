@@ -1,6 +1,5 @@
 from models.produto import Produto
 from configurations.configurations import Configurations
-from datetime import date
 import csv 
 import os
 
@@ -8,7 +7,7 @@ class ArquivoHelper():
     def __init__(self):
         self.__configurations = Configurations()
 
-    def ler_arquivo(self):
+    def ler_arquivo(self) -> list:
         if os.path.exists(self.__configurations.arquivo_saida):
             with open(self.__configurations.arquivo_saida, 'r', encoding='UTF-8') as arquivo:
                 arquivo_csv = csv.DictReader(arquivo)
@@ -24,7 +23,7 @@ class ArquivoHelper():
         else:
             return []
 
-    def escrever_arquivo(self, lista_produtos):
+    def escrever_arquivo(self, lista_produtos) -> None:
         with open(self.__configurations.arquivo_saida, 'w+', encoding='UTF-8') as arquivo:
             linhas_saida = [
                 ['id', 'nome', 'fornecedor', 'quantidade_minima', 'quantidade_atual']

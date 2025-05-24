@@ -7,37 +7,40 @@ class Produto:
     self.__quantidade_atual = 0
     
   @property
-  def id(self):
+  def id(self) -> int:
     return self.__id
 
   @property
-  def nome(self):
+  def nome(self) -> str:
     return self.__nome
 
   @property
-  def fornecedor(self):
+  def fornecedor(self) -> str:
     return self.__fornecedor
   
   @property
-  def quantidade_minima(self):
+  def quantidade_minima(self) -> float:
     return self.__quantidade_minima
   
   @property
-  def quantidade_atual(self):
+  def quantidade_atual(self) -> int:
     return self.__quantidade_atual
 
-  def adicionar_estoque(self, quantidade):
+  def adicionar_estoque(self, quantidade) -> None:
     self.__quantidade_atual += quantidade
+    return None
 
-  def retirar_estoque(self, quantidade):
+  def retirar_estoque(self, quantidade) -> None:
     self.__quantidade_atual -= quantidade
+    return None
 
-  def atualizar(self, nome, fornecedor, quantidade_minima):
+  def atualizar(self, nome, fornecedor, quantidade_minima) -> None:
     self.__nome = nome
     self.__fornecedor = fornecedor
     self.__quantidade_minima = quantidade_minima
+    return None
 
-  def gerar_lista_campos_arquivo(self):
+  def gerar_lista_campos_arquivo(self) -> list:
     return [
         self.id,
         self.nome,
@@ -46,7 +49,7 @@ class Produto:
         self.quantidade_atual
     ]
 
-  def __str__(self):
+  def __str__(self) -> str:
     return f"Id: {self.id} | Nome: {self.nome} | Fornecedor: {self.fornecedor} | Quantidade mínima: {self.quantidade_minima} | Estoque atual: {self.quantidade_atual}"
 
   @staticmethod

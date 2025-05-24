@@ -20,8 +20,11 @@ class Main:
             'S': ('Sair', self.sair),
         }
 
-    def executar_aplicacao(self):
-        print("\nBem vindo ao Gerenciador de Estoque!\n")
+    def executar_aplicacao(self) -> None:
+        TerminalHelper.limpar_tela()
+
+        print("Bem vindo ao Gerenciador de Estoque!\n")
+
         self.__estoque.produtos_com_baixo_estoque()
 
         while(self.__executando):
@@ -33,10 +36,10 @@ class Main:
 
             self.executar_funcao(opcao)
 
-    def executar_funcao(self, opcao):
+    def executar_funcao(self, opcao) -> None:
         if(opcao == 'S'):
             self.sair()
-            return
+            return None
 
         if opcao not in self.__opcoes:
             print("\nOpção inválida. Tente novamente.\n")
@@ -46,10 +49,11 @@ class Main:
                 self.sair()
             else:
                 TerminalHelper.limpar_tela()
+            return None
 
-            return
+        TerminalHelper.limpar_tela()
 
-        print(f"\nVocê escolheu a opção: {self.__opcoes[opcao][0]}\n") # opcoes[opcao][0] é o descrição da função
+        print(f"Você escolheu a opção: {self.__opcoes[opcao][0]}\n") # opcoes[opcao][0] é o descrição da função
         self.__opcoes[opcao][1]() # Chama a função correspondente à opção escolhida
 
         continuar = input('\nDeseja Continuar? (S/N) ')
@@ -59,7 +63,7 @@ class Main:
             self.sair()
         else:
             TerminalHelper.limpar_tela()
-            return
+            return None
 
     def sair(self):
         self.__executando = False
