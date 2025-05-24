@@ -25,7 +25,7 @@ class Main:
 
         print("Bem vindo ao Gerenciador de Estoque!\n")
 
-        self.__estoque.produtos_com_baixo_estoque()
+        self.__estoque.listar_todos_produtos_com_baixo_estoque()
 
         while(self.__executando):
             for opt in self.__opcoes:
