@@ -1,53 +1,98 @@
-from aplicacao.gestao_produto import ProdutoApp
+from aplicacao.gestao_produto import GestaoProduto
 from models.produto import Produto
+from helpers.validacao_helper import ValidacaoHelper
+from helpers.terminal_helper import TerminalHelper
 
 class GestaoEstoque:
-    def __init__(self):
-        self.__produto_app__ = ProdutoApp()
-        pass
+    def __init__(self, gestao_produto):
+        self.__gestao_produto = gestao_produto
 
     def adicionar_ao_estoque(self):
-        self.__produto_app__.listar_todos_produtos()
+        TerminalHelper.limpar_tela()
+        self.__gestao_produto.listar_todos_produtos()
 
-        produto_selecionado = input('Selecione qual produto deseja adicionar ao estoque (id): ')
-        produto_selecionado.strip().upper()
+        id = input('Entre com o id do produto cujo estoque será aumentado: ')
+        id = id.strip().upper()
 
-        produto = self.__produto_app__.seleciona_produto_por_id(produto_selecionado)
+        if not ValidacaoHelper.validar_string_numerica(id):
+            print("\nDigitado valor inválido para o id")
+            return 
 
-        quantidade = input(f'Quantos do Produto {produto.nome} deseja adicionar ao estoque (unidade): ')
-        quantidade = int(quantidade)
+        id = int(id)
 
-        if(quantidade <= 0):
-            print('Quantidade inválida...')
+        produto = self.__gestao_produto.get_produto_por_id(id)
+
+        if produto is None:
+            print("\nNão foi encontrado um produto com o id digitado.")
             return
 
-        # TODO acessa o csv e adicionar mais um produto ao estoque
+        quantidade = input(f'Qual quantidade do produto {produto.nome} deseja adicionar ao estoque? ')
 
-        print('Produto(s) adicionado ao estoque com sucesso!')
+        if not ValidacaoHelper.validar_string_numerica(quantidade):
+            print("\nQuantidade inválida.")
+            return
 
-    def retirar_do_estoque(self):
-        self.__produto_app__.listar_todos_produtos()
-
-        produto_selecionado = input('Selecione qual produto deseja adicionar ao estoque (id): ')
-        produto_selecionado.strip().upper()
-
-        produto = self.__produto_app__.seleciona_produto_por_id(produto_selecionado)
-
-        quantidade = input(f'Quantos do Produto {produto.nome} deseja remover do estoque (unidade): ')
-        quantidade = int(quantidade)
+        quantidade = float(quantidade)
 
         if(quantidade <= 0):
-            print('Quantidade inválida...')
+            print('\nQuantidade inválida. Não é possível adicionar uma quantidade menor ou igual a 0 ao estoque.')
+            return
+
+        produto.adicionar_estoque(quantidade)
+
+        self.__gestao_produto.salvar_lista_produtos()
+
+        print('\nQuantidade adicionada ao estoque do produto com sucesso!')
+        print(f"Nova quantidade: { produto.quantidade_atual }")
+
+    def retirar_do_estoque(self):
+        self.__gestao_produto.listar_todos_produtos()
+
+        id = input('Entre com o id do produto cujo estoque será subtraído: ')
+        id = id.strip().upper()
+
+        if not ValidacaoHelper.validar_string_numerica(id):
+            print("\nDigitado valor inválido para o id")
+            return 
+
+        id = int(id)
+
+        produto = self.__gestao_produto.get_produto_por_id(id)
+
+        if produto is None:
+            print("\nNão foi encontrado um produto com o id digitado.")
+            return
+
+        quantidade = input(f'Que quantidade do Produto {produto.nome} deseja remover do estoque: ')
+
+        if not ValidacaoHelper.validar_string_numerica(quantidade):
+            print("\nQuantidade inválida.")
+            return
+
+        quantidade = float(quantidade)
+
+        if(quantidade <= 0):
+            print('\nQuantidade inválida. Não é possível extrair uma quantidade negativa ou zerada do estoque.')
             return
 
         if(quantidade >= produto.quantidade_atual):
-            # TODO acessa o csv e remove todo o estoque desse produto
-            pass
+            print("\nNão é possível remover essa quantidade do estoque. Não há estoque suficiente.")
+            return
 
-        # TODO acessa o csv e remove a quantidade do estoque desse produto
+        produto.retirar_estoque(quantidade)
 
-        print('Produto(s) removidos do estoque com sucesso!')
+        self.__gestao_produto.salvar_lista_produtos()
+
+        print('\nQuantidade subtraída com sucesso do estoque do Produto!')
+        print(f'Quantidade atual: { produto.quantidade_atual }')
 
     def produtos_com_baixo_estoque(self):
-        # TODO acessa o csv vendo todos os produto que produto.quantidade_atual < produto.quantidade_minima
-        pass
+        lista_produtos_baixo_estoque = self.__gestao_produto.get_lista_produtos_quantidade_abaixo_minimo()
+
+        if len(lista_produtos_baixo_estoque) > 0:
+            print("ATENÇÃO! Os seguintes produtos estão com estoque menor ou igual à quantidade mínima cadastrada: \n")
+            for produto in lista_produtos_baixo_estoque:
+                print(produto)
+
+            print(" ")
+
