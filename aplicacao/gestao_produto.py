@@ -1,6 +1,7 @@
 from models.produto import Produto
 from helpers.arquivo_helper import ArquivoHelper
 from helpers.validacao_helper import ValidacaoHelper
+from tabulate import tabulate
 
 class GestaoProduto:
     def __init__(self):
@@ -21,8 +22,11 @@ class GestaoProduto:
         
         print('Lista de produtos cadastrados:')
 
-        for produto in self.__lista_produtos:
-            print(produto)
+        tabela = [
+            [produto.id, produto.nome, produto.fornecedor, produto.quantidade_minima, produto.quantidade_atual]
+            for produto in self.__lista_produtos
+        ]
+        print(tabulate(tabela, headers=['Id', 'Nome', 'Fornecedor', 'Quantidade mínima', 'Estoque atual'], tablefmt="rounded_grid"))
 
     def pesquisar_produto_nome(self) -> None:
         nome = input("Entre com o nome do produto que você deseja visualizar. ")

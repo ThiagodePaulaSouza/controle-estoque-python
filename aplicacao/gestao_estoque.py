@@ -1,4 +1,5 @@
 from helpers.validacao_helper import ValidacaoHelper
+from tabulate import tabulate
 
 class GestaoEstoque:
     def __init__(self, gestao_produto):
@@ -79,13 +80,16 @@ class GestaoEstoque:
         print('\nQuantidade subtraída com sucesso do estoque do Produto!')
         print(f'Quantidade atual: { produto.quantidade_atual }')
 
-    def produtos_com_baixo_estoque(self) -> None:
+    def listar_todos_produtos_com_baixo_estoque(self) -> None:
         lista_produtos_baixo_estoque = self.__gestao_produto.listar_produtos_quantidade_abaixo_minimo()
         if len(lista_produtos_baixo_estoque) == 0:
             return None
 
-        print("ATENÇÃO! Os seguintes produtos estão com estoque menor ou igual à quantidade mínima cadastrada: \n")
-        for produto in lista_produtos_baixo_estoque:
-            print(produto)
+        print("ATENÇÃO! Os seguintes produtos estão com estoque menor ou igual à quantidade mínima cadastrada:")
 
+        tabela = [
+            [produto.id, produto.nome, produto.fornecedor, produto.quantidade_minima, produto.quantidade_atual]
+            for produto in lista_produtos_baixo_estoque
+        ]
+        print(tabulate(tabela, headers=['Id', 'Nome', 'Fornecedor', 'Quantidade mínima', 'Estoque atual'], tablefmt="rounded_grid"))
         print(" ")
